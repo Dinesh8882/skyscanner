@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import BookingSearch from '../components/Flight/BookingSearch'
 import img from '../assets/Large-Flights-hero-2.webp'
 import {
@@ -11,25 +11,28 @@ import {
   popularFlightDestinations
 } from '../config/flight.config'
 import PangelHeading from '../components/Heading/PangelHeading'
-import FlightCard from '../components/Flight/FlightCard'
+// import FlightCard from '../components/Flight/FlightCard'
 import Buttons from '../components/Buttons/Button'
 
-
-
 import useFAQItems from '../hooks/useFAQItems'
+import useTabActive from '../hooks/useTabHandler'
+import usePagination from '../hooks/usePagination'
+
+import HighlightCard from '../components/Global/HighlightCard'
 import FAQColumn from '../components/FAQSection/FAQColumn'
 import Peragrapg from '../components/Heading/Peragrapg'
 import LocationTabs from '../components/Buttons/LocationTabs'
-import useTabActive from '../hooks/useTabHandler'
-import usePagination from '../hooks/usePagination'
 import FeatureItem from '../components/Global/FeatureItem'
 import Advantages from '../components/Global/Advantages'
 import AdvantagesWrapper from '../components/Wrappers/AdvantagesWrapper'
 import PopularLinks from '../components/Global/PopularLinks'
 import DotBtns from '../components/Global/DotBtns'
-import HighlightCard from '../components/Global/HighlightCard'
 import PageWrapper from '../components/Wrappers/PageWrapper'
 import InfoBanner from '../components/Global/InfoBanner'
+import ShinyBox from '../components/Animations/ShinyBox'
+
+
+const FlightCard = lazy(() => import('../components/Flight/FlightCard'))
 
 // px-[clamp(1rem,4.7vw,90px)]
 
@@ -54,18 +57,22 @@ function Flight() {
 
         <p className='mt-1'>Here are the flight deals with the lowest prices. Act fast – they all depart within the next three months.</p>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {
-            flightDestinations.map((item) => (
-              <FlightCard
-                key={item.id}
-                img={item.image}
-                city={item.city}
-                country={item.country}
-                flights={item.flights}
-                flightPric={item.priceFrom.toLocaleString("en-IN")}
-              />
-            ))
-          }
+          <Suspense fallback={flightDestinations.map((item) => (
+            <ShinyBox key={item.id} {...item} variant="flightDes" />
+          ))}>
+            {
+              flightDestinations.map((item) => (
+                <FlightCard
+                  key={item.id}
+                  img={item.image}
+                  city={item.city}
+                  country={item.country}
+                  flights={item.flights}
+                  flightPric={item.priceFrom.toLocaleString("en-IN")}
+                />
+              ))
+            }
+          </Suspense>
         </div>
         <Buttons name="See more deals" variant="flight" />
 
@@ -77,7 +84,7 @@ function Flight() {
           </p>
         </InfoBanner>
 
-        
+
 
         <PangelHeading title="Finding flight deals: frequently asked questions" variants="FAQFlight" />
         <FAQColumn variants="flightFAQ" data={data} isOpenHandler={isOpenHandler} />

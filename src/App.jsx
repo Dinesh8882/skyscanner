@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
-import Flight from './pages/Flight'
-import Hotel from './pages/Hotel'
-import CarHire from './pages/CarHire'
+
+const Home = lazy(() => import('./pages/Home'))
+const Flight = lazy(() => import('./pages/Flight'))
+const CarHire = lazy(() => import('./pages/CarHire'))
+const Hotel = lazy(() => import('./pages/Hotel'))
 
 function App() {
   return (

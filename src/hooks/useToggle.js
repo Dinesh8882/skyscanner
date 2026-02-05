@@ -4,14 +4,12 @@ function useToggle(isOpen = false) {
     const [toggle, setToggle] = useState(isOpen)
 
     const togglerHandler = () => {
-        console.log("helo");
-        
         setToggle(prev => !prev)
     }
 
     return {
-        toggle, 
-        togglerHandler
+        toggle,
+        togglerHandler,
     }
 
 }

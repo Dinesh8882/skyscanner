@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import SearchPanel from '../components/SearchPanel/SearchPanel'
 
 import PangelHeading from '../components/Heading/PangelHeading';
@@ -6,11 +6,12 @@ import LocationTabs from '../components/Buttons/LocationTabs';
 import { carHireLocations, locationTabs } from '../config/button.config'
 import useTabActive from '../hooks/useTabHandler';
 import ServiceTabs from '../components/PrimaryActions/ServiceTabs';
-import FAQAccordion from '../components/FAQSection/FAQAccordion';
 import usePagination from '../hooks/usePagination';
-import PopularLinks from '../components/Global/PopularLinks';
-import DotBtns from '../components/Global/DotBtns';
 import PageWrapper from '../components/Wrappers/PageWrapper';
+
+const FAQAccordion = lazy(() => import('../components/FAQSection/FAQAccordion'))
+const PopularLinks = lazy(() => import('../components/Global/PopularLinks'))
+const DotBtns = lazy(() => import('../components/Global/DotBtns'));
 
 function Home() {
     const { activeTab, isActiveHandler } = useTabActive("country");
@@ -27,11 +28,19 @@ function Home() {
             <PageWrapper>
                 <ServiceTabs />
                 <PangelHeading title="Booking flights with Skyscanner" variants="FAQ" />
-                <FAQAccordion />
+
+                <Suspense fallback={<div>FAQ Loading....</div>}>
+                    <FAQAccordion />
+                </Suspense>
+
                 <PangelHeading title="Start planning your adventure" variants="country" />
                 <LocationTabs items={locationTabs} isActiveHandler={isActiveHandler} activeTab={activeTab} />
-                <PopularLinks items={currentItems} gridCols={gridCols} />
-                <DotBtns pages={totalPage} index={page} slideBtn={pageVisit} />
+
+
+                <Suspense fallback={<div>Loading destinations...</div>}>
+                    <PopularLinks items={currentItems} gridCols={gridCols} />
+                    <DotBtns pages={totalPage} index={page} slideBtn={pageVisit} />
+                </Suspense>
             </PageWrapper>
         </>
     )

@@ -25,7 +25,7 @@ function FlightSearchForm({ variants }) {
                         />
                     ))
                 }
-                <button className='bg-[#0062e3] text-white ml-3 hidden md:block rounded-xl'>Search</button>
+                <button className='bg-[#0062e3] text-white ml-2 hidden md:block rounded-xl'>Search</button>
             </div>
 
             <div className='flex flex-col md:grid md:grid-cols-11 gap-[clamp(2px,0vw,1rem)] mt-2 '>
