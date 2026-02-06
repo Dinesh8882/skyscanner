@@ -1,8 +1,12 @@
 import React from 'react'
 
-function DotBtns({ pages, slideBtn, index }) {
+const dotsVariants = {
+    // hotelDots: "hidden sm:flex"
+}
+
+function DotBtns({ pages, slideBtn, index, variant }) {
     return (
-        <div className='flex justify-center gap-2 mt-6'>
+        <div className={`justify-center gap-2 mt-6 hidden sm:flex ${dotsVariants[variant]}`}>
             {
                 [...Array(pages)].map((_, idx) => (
                     <div

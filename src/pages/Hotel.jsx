@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import BookingSearch from '../components/Flight/BookingSearch'
 import img from '../assets/hotel.webp'
 import {
@@ -39,6 +39,7 @@ import SmartExplore from '../components/Global/SmartExplore'
 
 function Hotel() {
   const { activeTab, isActiveHandler } = useTabActive("hyderabad")
+  const [itemPerPage, setItemPerPage] = useState(3)
   const {
     index: hotelIndex,
     totalPage: hotelPages,
@@ -47,7 +48,7 @@ function Hotel() {
     cardWidthRef: hotelRef,
     cardGap: hotelGap,
     cardWidth: hotelWidth
-  } = useSlider({ itemPerPage: 3, items: hotelCards[activeTab], deps: activeTab })
+  } = useSlider({ itemPerPage, items: hotelCards[activeTab], deps: activeTab })
 
   const {
     index: destIndex,
@@ -57,7 +58,7 @@ function Hotel() {
     cardWidthRef: destRef,
     cardGap: destGap,
     cardWidth: destWidth
-  } = useSlider({ itemPerPage: 3, items: destinationCards, deps: [destinationCards] });
+  } = useSlider({ itemPerPage, items: destinationCards, deps: [destinationCards] });
 
   const { isOpenHandler, data } = useFAQItems(hotelFAQs)
   const { activeTab: locationTabs, isActiveHandler: locationTabsHandle } = useTabActive("cities")
@@ -68,13 +69,32 @@ function Hotel() {
     setPage(0)
   }, [locationTabs])
 
+  useEffect(() => {
+    const updateItems = () => {
+      const width = window.innerWidth
+      hotelSlideBtn(0)
+      destSlide(0)
+      if (width >= 1024) {
+        setItemPerPage(3); 
+      } else if (width >= 768) {
+        setItemPerPage(2); 
+      } else {
+        setItemPerPage(1); 
+      }
+    }
+
+    updateItems()
+    window.addEventListener("resize", updateItems)
+
+    return ()=> window.removeEventListener("resize",updateItems)
+  }, [])
 
 
   return (
     <div>
-      <BookingSearch title="Find the right hotel today" img={img} variants="hotel" />
+      {/* <BookingSearch title="Find the right hotel today" img={img} variants="hotel" /> */}
       <PageWrapper>
-        <div className='grid sm:grid-cols-3  mt-16 md:gap-16 gap-8 '>
+        {/* <div className='grid sm:grid-cols-3  mt-16 md:gap-16 gap-8 '>
           {
             hotelFeatures.map((item) => (
               <FeatureItem
@@ -86,35 +106,22 @@ function Hotel() {
               />
             ))
           }
-        </div>
+        </div> */}
 
-        <PangelHeading title="Compare hotels across your favourite brands" variants='hotel' />
+        {/* <PangelHeading title="Compare hotels across your favourite brands" variants='hotel' /> */}
 
-        <Brands items={travelPartners} />
-        <PangelHeading title="Hotels in your home country" variants='hotel' />
-        <Peragrapg pera="Your next adventure may be closer than you think. Discover hotels just beyond your doorstep." variants="hotelPera" />
+        {/* <Brands items={travelPartners} /> */}
+        {/* <PangelHeading title="Hotels in your home country" variants='hotel' /> */}
+        {/* <Peragrapg pera="Your next adventure may be closer than you think. Discover hotels just beyond your doorstep." variants="hotelPera" /> */}
+        {/* <LocationTabs items={topLocations} isActiveHandler={isActiveHandler} activeTab={activeTab} /> */}
 
-        <div className='flex gap-3 mt-5 '>
-          {
-            topLocations.map((item) => (
-              <LocationTabs
-                key={item.id}
-                type={item.label}
-                text={item.value}
-                isActiveHandler={isActiveHandler}
-                activeTab={activeTab}
-              />
-            ))
-          }
-        </div>
-
-        <div className='mt-7 overflow-hidden w-full pb-6'>
+        <div className='mt-7 overflow-hidden  w-full pb-6'>
           <motion.div
             ref={hotelGap}
             initial={{ x: 0 }}
             animate={{ x: -(hotelIndex * hotelWidth * hotelPerPage) }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="flex gap-4"
+            className="flex overflow-x-auto  no-scrollbar sm:overflow-x-visible  gap-4"
           >
             {hotelCards[activeTab].map((item, ind) => (
               <HotelCard
@@ -126,7 +133,7 @@ function Hotel() {
           </motion.div>
         </div>
 
-        <DotBtns pages={hotelPages} slideBtn={hotelSlideBtn} index={hotelIndex} />
+        <DotBtns pages={hotelPages} slideBtn={hotelSlideBtn} index={hotelIndex} variant="hotelDots" />
 
         <PangelHeading title="Hotels for fab city breaks" variants='hotel' />
         <Peragrapg
