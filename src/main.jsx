@@ -10,7 +10,7 @@ import Footer from './components/Footer/Footer.jsx'
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <FlightContextProvider>
-      {/* <CombineNavbar /> */}
+      <CombineNavbar />
       <App />
       <Footer />
     </FlightContextProvider>
