@@ -31,7 +31,7 @@ function Return() {
             <div
               onClick={(e) => e.stopPropagation()}
               className='
-             w-full p-6 md:p-4 md:w-62.5 md:h-37.5 
+             w-full p-6 md:p-4 md:w-75 md:h-37.5 
              bg-white md:top-full mt-2  bottom-0 rounded-t-xl 
              md:rounded-xl  left-0 absolute
               '>
