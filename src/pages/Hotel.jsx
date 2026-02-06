@@ -92,9 +92,9 @@ function Hotel() {
 
   return (
     <div>
-      {/* <BookingSearch title="Find the right hotel today" img={img} variants="hotel" /> */}
+      <BookingSearch title="Find the right hotel today" img={img} variants="hotel" />
       <PageWrapper>
-        {/* <div className='grid sm:grid-cols-3  mt-16 md:gap-16 gap-8 '>
+        <div className='grid sm:grid-cols-3  mt-16 md:gap-16 gap-8 '>
           {
             hotelFeatures.map((item) => (
               <FeatureItem
@@ -106,14 +106,14 @@ function Hotel() {
               />
             ))
           }
-        </div> */}
+        </div>
 
-        {/* <PangelHeading title="Compare hotels across your favourite brands" variants='hotel' /> */}
+        <PangelHeading title="Compare hotels across your favourite brands" variants='hotel' />
 
-        {/* <Brands items={travelPartners} /> */}
-        {/* <PangelHeading title="Hotels in your home country" variants='hotel' /> */}
-        {/* <Peragrapg pera="Your next adventure may be closer than you think. Discover hotels just beyond your doorstep." variants="hotelPera" /> */}
-        {/* <LocationTabs items={topLocations} isActiveHandler={isActiveHandler} activeTab={activeTab} /> */}
+        <Brands items={travelPartners} />
+        <PangelHeading title="Hotels in your home country" variants='hotel' />
+        <Peragrapg pera="Your next adventure may be closer than you think. Discover hotels just beyond your doorstep." variants="hotelPera" />
+        <LocationTabs items={topLocations} isActiveHandler={isActiveHandler} activeTab={activeTab} />
 
         <div className='mt-7 overflow-hidden  w-full pb-6'>
           <motion.div
