@@ -27,7 +27,6 @@ function Home() {
             <SearchPanel variants="home" />
             <PageWrapper>
                 <ServiceTabs />
-                <h1>Dinesh</h1>
                 <PangelHeading title="Booking flights with Skyscanner" variants="FAQ" />
 
                 <Suspense fallback={<div>FAQ Loading....</div>}>
