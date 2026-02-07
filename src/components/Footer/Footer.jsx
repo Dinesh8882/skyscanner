@@ -49,8 +49,8 @@ function Footer() {
           </ul>
         </div>
       </div>
-      <p className='text-center mt-[3rem] text-[12px] text-white'>Cheap flight booking from anywhere, to everywhere</p>
-      <p className='text-center  text-[14px] text-white'>© Skyscanner clone made by Dinesh.</p>
+      <p className='sm:text-center mt-[3rem] text-[12px] text-white'>Cheap flight booking from anywhere, to everywhere</p>
+      <p className='sm:text-center  text-[14px] text-white'>© Skyscanner clone made by Dinesh.</p>
 
 
     </footer>
