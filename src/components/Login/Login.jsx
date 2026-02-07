@@ -8,34 +8,43 @@ import { FlightContext } from '../../context/FlightsContext';
 
 import { AnimatePresence, motion } from 'framer-motion'
 
+import { DiApple } from "react-icons/di";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
+
+
 
 const authProviders = [
     {
         id: 1,
         name: "Continue with Email",
         provider: "email",
-        icon: "email",
+        icon: null,
+        iconClass: "",
         link: "/auth/email"
     },
     {
         id: 2,
         name: "Facebook",
         provider: "facebook",
-        icon: "facebook",
+        icon: FaFacebook,
+        iconClass: "text-[#0062e3]",
         link: "https://www.facebook.com/v12.0/dialog/oauth"
     },
     {
         id: 3,
         name: " Google",
         provider: "google",
-        icon: "google",
+        icon: FcGoogle,
+        iconClass: "",
         link: "https://accounts.google.com/o/oauth2/v2/auth"
     },
     {
         id: 4,
         name: "Apple",
         provider: "apple",
-        icon: "apple",
+        icon: DiApple,
+        iconClass: "",
         link: "https://appleid.apple.com/auth/authorize"
     }
 ];
@@ -100,9 +109,12 @@ function Login() {
                                     <Peragrapg pera="Track prices, make trip planning easier and enjoy faster booking." variants="login" />
                                     <div className='flex flex-col items-center mt-8 gap-4'>
                                         {
-                                            authProviders.map((item) => (
-                                                <NavLink className="font-bold text-[16px] bg-[#e0e4e9] py-3 rounded-lg cursor-pointer w-full text-center">
-                                                    {item.name}
+                                            authProviders.map(({ name, icon: ProviderIcon, id ,iconClass}) => (
+                                                <NavLink key={id} className="font-bold flex justify-center items-center gap-1 text-[16px] bg-[#e0e4e9] py-3 rounded-lg cursor-pointer w-full">
+                                                    {
+                                                        ProviderIcon && <ProviderIcon className={`${iconClass}`} />
+                                                    }
+                                                    {name}
                                                 </NavLink>
                                             ))
                                         }
