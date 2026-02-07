@@ -28,7 +28,7 @@ const authProviders = [
         name: "Facebook",
         provider: "facebook",
         icon: FaFacebook,
-        iconClass: "text-[#0062e3]",
+        iconClass: "text-[#0062e3] text-xl",
         link: "https://www.facebook.com/v12.0/dialog/oauth"
     },
     {
@@ -36,7 +36,7 @@ const authProviders = [
         name: " Google",
         provider: "google",
         icon: FcGoogle,
-        iconClass: "",
+        iconClass: "text-xl",
         link: "https://accounts.google.com/o/oauth2/v2/auth"
     },
     {
@@ -44,7 +44,7 @@ const authProviders = [
         name: "Apple",
         provider: "apple",
         icon: DiApple,
-        iconClass: "",
+        iconClass: "text-2xl",
         link: "https://appleid.apple.com/auth/authorize"
     }
 ];
@@ -110,9 +110,9 @@ function Login() {
                                     <div className='flex flex-col items-center mt-8 gap-4'>
                                         {
                                             authProviders.map(({ name, icon: ProviderIcon, id ,iconClass}) => (
-                                                <NavLink key={id} className="font-bold flex justify-center items-center gap-1 text-[16px] bg-[#e0e4e9] py-3 rounded-lg cursor-pointer w-full">
+                                                <NavLink key={id} className="font-bold flex justify-center items-center gap-0.5 text-[16px] bg-[#e0e4e9] py-3 rounded-lg cursor-pointer w-full">
                                                     {
-                                                        ProviderIcon && <ProviderIcon className={`${iconClass}`} />
+                                                        ProviderIcon && <ProviderIcon className={`${iconClass} `} />
                                                     }
                                                     {name}
                                                 </NavLink>
