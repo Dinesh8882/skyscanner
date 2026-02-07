@@ -6,7 +6,8 @@ const peraVariants = {
     flightFeatureItem:"text-[#626b96]",
     hotelFeatureItem:"text-sm font-medium",
     hotelPera:"mt-2",
-    carPage:"pt-1 text-[16px]"
+    carPage:"pt-1 text-[16px]",
+    login:"w-[90%]"
 }
 
 function Peragrapg({pera,variants}) {

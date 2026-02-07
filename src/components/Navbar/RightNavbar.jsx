@@ -10,6 +10,7 @@ import Button from '../Buttons/Button';
 
 function RightNavbar() {
     const { activeLink } = useContext(FlightContext)
+    const {loginHandler } = useContext(FlightContext)
 
     return (
         <div className='text-white flex items-center gap-4'>
@@ -22,14 +23,14 @@ function RightNavbar() {
                 ) : (
                     <>
                         <Button name="English (UK) India INR" variant="secondary" />
-                        <IoPersonCircleOutline className='text-2xl md:hidden'  />
+                        <IoPersonCircleOutline onClick={loginHandler} className='text-2xl md:hidden' />
                     </>
                 )
             }
             <NavLink to='#'><GoHeartFill className='text-xl' /></NavLink>
             {
                 activeLink === '/' ? (
-                    <NavLink to='#' className="md:flex items-center  gap-1"><IoPersonCircleOutline className='text-2xl' /><span className='hidden md:block'>Log in</span></NavLink>
+                    <NavLink to='#' className="md:flex items-center  gap-1" onClick={loginHandler}><IoPersonCircleOutline className='text-2xl' /><span className='hidden md:block'>Log in</span></NavLink>
                 ) : <Button name="Log in" variant="login" />
             }
 

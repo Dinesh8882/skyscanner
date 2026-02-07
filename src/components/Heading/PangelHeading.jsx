@@ -17,7 +17,8 @@ const headingVariants = {
   carPage: " text-[24px] sm:text-[32px] mt-24",
   carPageTab: "mt-24 text-[24px]",
   popularCarRent: "text-[24px] sm:text-4xl",
-  default: "text-white text-[32px]"
+  default: "text-white text-[32px]",
+  login:"text-[32px] mb-5 mt-6"
 }
 
 function PangelHeading({ title, variants = "default" }) {
