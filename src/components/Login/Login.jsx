@@ -53,6 +53,17 @@ const authProviders = [
 function Login() {
     const { isLogin, loginHandler } = useContext(FlightContext)
 
+    useEffect(() => {
+        if (isLogin) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [isLogin])
+
     return (
         <>
 
@@ -109,7 +120,7 @@ function Login() {
                                     <Peragrapg pera="Track prices, make trip planning easier and enjoy faster booking." variants="login" />
                                     <div className='flex flex-col items-center mt-8 gap-4'>
                                         {
-                                            authProviders.map(({ name, icon: ProviderIcon, id ,iconClass}) => (
+                                            authProviders.map(({ name, icon: ProviderIcon, id, iconClass }) => (
                                                 <NavLink key={id} className="font-bold flex justify-center items-center gap-0.5 text-[16px] bg-[#e0e4e9] py-3 rounded-lg cursor-pointer w-full">
                                                     {
                                                         ProviderIcon && <ProviderIcon className={`${iconClass} `} />
